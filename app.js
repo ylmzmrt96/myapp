@@ -6,5 +6,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(port, () => {
-  console.log(`Sunucu http://localhost:${port} adresinde çalışıyor`);
+  console.log(`The server is running at http://localhost:${port}`);
 });

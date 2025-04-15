@@ -1,0 +1,31 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main # It will be run every time a push is made to the main branch.
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check the code
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Create Docker Image
+        run: |
+          docker build -t myapp:latest .
+          docker tag myapp:latest necati55/myapp:latest
+          docker push necati55/myapp:latest
